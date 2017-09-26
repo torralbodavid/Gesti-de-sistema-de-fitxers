@@ -1,5 +1,6 @@
 package cat.torralbo.accesdades;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -89,5 +90,85 @@ public class Fitxers {
         return creat;
 
     }
+
+    public static void retornaNombreFitxers(File ruta){
+        File[] llista = ruta.listFiles();
+
+        int j = 0, k = 0;
+
+        for (int i = 0; i < llista.length; i++) {
+            if (llista[i].isFile()) {
+                j++;
+            } else if (llista[i].isDirectory()) {
+                k++;
+            }
+        }
+
+        System.out.println("La ruta conté "+j+" arxius i "+k+" directoris");
+    }
+
+    public static void permisosFitxers(String nomFitxer){
+        File arxiu = new File(ruta + File.separator + nomFitxer);
+        if(arxiu.exists()){
+            System.out.println("\nCARACTERÍSTIQUES\n" +
+                    "###############\n");
+
+            if(arxiu.canRead()){
+                System.out.println("- Permisos lectura? Sí");
+            } else {
+                System.out.println("- Permisos lectura? No");
+            }
+
+            if(arxiu.canWrite()){
+                System.out.println("- Permisos escriptura? Sí");
+            } else {
+                System.out.println("- Permisos escriptura? No");
+            }
+
+            if(arxiu.canExecute()){
+                System.out.println("- Permisos d'execució? Sí");
+            } else {
+                System.out.println("- Permisos d'execució? No");
+            }
+
+            if(arxiu.isHidden()){
+                System.out.println("- És un arxiu ocult? Sí");
+            } else {
+                System.out.println("- És un arxiu ocult? No");
+            }
+
+            if(arxiu.isFile()){
+                System.out.println("- És un arxiu? Sí");
+            } else {
+                System.out.println("- És un arxiu? No");
+            }
+
+            if(arxiu.isDirectory()){
+                System.out.println("- És un directori? Sí");
+            } else {
+                System.out.println("- És un directori? No");
+            }
+
+        }
+
+    }
+
+    public static void llistarPNG(){
+
+        for(File f : ruta.listFiles()){
+
+            String fileName = f.getName();
+            String fileExtension = fileName.substring(fileName.indexOf(".") + 1, f.getName().length());
+
+            fileExtension = fileExtension.toLowerCase();
+
+            if(fileExtension.equals("png")){
+                System.out.println(f.getName());
+            }
+        }
+
+    }
+
+
 
 }
